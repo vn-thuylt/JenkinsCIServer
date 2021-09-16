@@ -1,0 +1,10 @@
+#!/bin/bash
+
+user="########"
+password="########"
+serverEndpoint="0.0.0.0"
+sharedDirectory="dirA/dirB"
+
+# Connect to Server ...
+# open "smb://$user:$password@$serverEndpoint/$sharedDirectory"
+# echo "+ Connecting to smb://$serverEndpoint/$sharedDirectory ..."
