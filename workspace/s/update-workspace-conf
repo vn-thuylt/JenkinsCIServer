@@ -14,19 +14,21 @@ function updateWorkspaceConf() {
     then
         echo "+ release-notes.md file does not exist"
         echo "+ Creating release-notes.md ..."
-        echo "### THE TITLE OF YOUR TASK" >> $PWD/release-notes.md
-        echo "* **Author**: [YOUR_NAME]" >> $PWD/release-notes.md
-        echo "* **Branch**: [YOUR_WORKING_BRANCH]" >> $PWD/release-notes.md
-        echo "* **Server**: private/public IP address (http://0.0.0.0:3000) or N/A" >> $PWD/release-notes.md
-        echo "* **Artifact Configurations**:" >> $PWD/release-notes.md
-        echo "  - Plugin version: 1.2.3" >> $PWD/release-notes.md
-        echo "  - My custom config: ..." >> $PWD/release-notes.md
-        echo "  - ..." >> $PWD/release-notes.md
-        echo "* **This release includes**:" >> $PWD/release-notes.md
-        echo "  - Fixed app crashed" >> $PWD/release-notes.md
-        echo "  - Bug fixes" >> $PWD/release-notes.md
-        echo "  - Performance improvements" >> $PWD/release-notes.md
-        echo "  - ..." >> $PWD/release-notes.md
+        {
+            echo "### THE TITLE OF YOUR TASK"
+            echo "* **Author**: [YOUR_NAME]"
+            echo "* **Branch**: [YOUR_WORKING_BRANCH]"
+            echo "* **Server**: private/public IP address (http://0.0.0.0:3000) or N/A"
+            echo "* **Artifact Configurations**:"
+            echo "  - Plugin version: 1.2.3"
+            echo "  - My custom config: ..."
+            echo "  - ..."
+            echo "* **This release includes**:"
+            echo "  - Fixed app crashed"
+            echo "  - Bug fixes"
+            echo "  - Performance improvements"
+            echo "  - ..." 
+        } >> $PWD/release-notes.md
         echo "+ release-notes.md file has been created"
     fi
 
