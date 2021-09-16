@@ -21,6 +21,7 @@ function updateWorkspaceConf() {
     then
         echo "+ release-notes.md file does not exist"
         echo "+ Creating release-notes.md ..."
+        echo "### THE TITLE OF YOUR TASK" >> $PWD/release-notes.md
         echo "* **Author**: [YOUR_NAME]" >> $PWD/release-notes.md
         echo "* **Branch**: [YOUR_WORKING_BRANCH]" >> $PWD/release-notes.md
         echo "* **Server**: private/public IP address (http://0.0.0.0:3000) or N/A" >> $PWD/release-notes.md
