@@ -1,0 +1,61 @@
+#!/bin/bash
+
+serverEndpoint="0.0.0.0"
+sharedDirectory="dirA/dirB"
+serverPublicDir=/dirA/dirB
+destination=dirA/dirB
+scheme="YOUR_SCHEME"
+
+function updateWorkspaceConf() {
+    serverWorkspaceConf=$serverPublicDir/$destination
+    echo "+ serverWorkspaceConf=$serverWorkspaceConf"
+
+    cp $PWD/App/Config/url.js $serverWorkspaceConf/url.js
+    echo "+ cp $PWD/App/Config/url.js $serverWorkspaceConf/url.js"
+    cp $PWD/ios/$scheme.xcodeproj/project.pbxproj $serverWorkspaceConf/project.pbxproj
+    echo "+ cp $PWD/ios/$scheme.xcodeproj/project.pbxproj $serverWorkspaceConf/project.pbxproj"
+    cp $PWD/ios/$scheme.xcodeproj/xcshareddata/xcschemes/$scheme.xcscheme $serverWorkspaceConf/$scheme.xcscheme
+    echo "+ cp $PWD/ios/$scheme.xcodeproj/xcshareddata/xcschemes/$scheme.xcscheme $serverWorkspaceConf/$scheme.xcscheme"
+
+    if [[ ! -f $PWD/release-notes.md ]]
+    then
+        echo "+ release-notes.md file does not exist"
+        echo "+ Creating release-notes.md ..."
+        echo "* **Author**: [YOUR_NAME]" >> $PWD/release-notes.md
+        echo "* **Branch**: [YOUR_WORKING_BRANCH]" >> $PWD/release-notes.md
+        echo "* **Server**: private/public IP address (http://0.0.0.0:3000) or N/A" >> $PWD/release-notes.md
+        echo "* **Artifact Configurations**:" >> $PWD/release-notes.md
+        echo "  - Plugin version: 1.2.3" >> $PWD/release-notes.md
+        echo "  - My custom config: ..." >> $PWD/release-notes.md
+        echo "  - ..." >> $PWD/release-notes.md
+        echo "* **This release includes**:" >> $PWD/release-notes.md
+        echo "  - Fixed app crashed" >> $PWD/release-notes.md
+        echo "  - Bug fixes" >> $PWD/release-notes.md
+        echo "  - Performance improvements" >> $PWD/release-notes.md
+        echo "  - ..." >> $PWD/release-notes.md
+        echo "+ release-notes.md file has been created"
+    fi
+
+    if [[ -f $PWD/release-notes.md ]]
+    then
+        echo "+ The following content is your release notes, let check it out and make some changes if you have your own update"
+        echo ""
+        echo "--------------------------------------------------"
+        cat $PWD/release-notes.md
+        echo "--------------------------------------------------"
+        echo ""
+    fi
+
+    cp $PWD/release-notes.md $serverWorkspaceConf/release-notes.md
+    echo "+ cp $PWD/release-notes.md $serverWorkspaceConf/release-notes.md"
+}
+
+if [[ -d "$serverPublicDir" ]]
+then
+    echo "+ $serverPublicDir exists on your file system"
+    echo "+ CONNECTED TO smb://$serverEndpoint/$sharedDirectory"
+    updateWorkspaceConf
+else
+    echo "+ $serverPublicDir does not exists on your file system"
+    echo "+ PLEASE CONNECT TO YOUR SERVER BEFORE YOU DO MORE LATER STEPS"
+fi
